@@ -150,5 +150,5 @@ ${response.credits}
 --
         `
         // Write README file
-        fs.writeFileSync('READMEtest.md', readmeString);
+        fs.writeFileSync('../README.md', readmeString);
     })
