@@ -1,7 +1,7 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 
-
+// Inquirer prompts to capture project information
 inquirer
     .prompt([
         {
@@ -58,6 +58,7 @@ inquirer
         }
     ])
     .then(response => {
+        // Save contribution info to variable
         let contribInfo = response.contribute + ", as described at [the Contributor Covenant website](https://www.contributor-covenant.org/)";
         let contribBadge = "[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)";
         if (response.contribute === "Custom") {
@@ -75,6 +76,7 @@ inquirer
                 })
         } ;
 
+        // Save licensing info to variable
         let licenseInfo = "";
         let licenseBadge = "";
         switch (response.license) {
@@ -95,6 +97,7 @@ inquirer
                 licenseBadge = '[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)'
                 break;
         }
+        // Populate readme string with user inputs
         let readmeString = `
 # ${response.title}
 
@@ -146,6 +149,6 @@ ${response.credits}
 
 --
         `
-        
-        fs.writeFileSync('READMEtest3.md', readmeString);
+        // Write README file
+        fs.writeFileSync('READMEtest.md', readmeString);
     })
