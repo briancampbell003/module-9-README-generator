@@ -43,6 +43,11 @@ inquirer
         },
         {
             type: 'input',
+            message: 'Please give credit to any collaborators or online resources that helped in creating your project.',
+            name: 'credits',
+        },
+        {
+            type: 'input',
             message: 'What is your GitHub username?',
             name: 'GitUser',
         },
@@ -53,7 +58,8 @@ inquirer
         }
     ])
     .then(response => {
-        let contribInfo = response.contrib + ", as described at [the Contributor Covenant website](https://www.contributor-covenant.org/)";
+        let contribInfo = response.contribute + ", as described at [the Contributor Covenant website](https://www.contributor-covenant.org/)";
+        let contribBadge = "[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)";
         if (response.contribute === "Custom") {
             inquirer
                 .prompt([
@@ -65,28 +71,35 @@ inquirer
                 ])
                 .then(response => {
                     let contribInfo = response.customContrib;
+                    let contribBadge = "";
                 })
         } ;
 
         let licenseInfo = "";
+        let licenseBadge = "";
         switch (response.license) {
             case "MIT License":
                 licenseInfo = `${response.title} is covered under the MIT License, as outlined at the [MIT License page on ChooseALicense](https://choosealicense.com/licenses/mit/)`;
+                licenseBadge = '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)'
                 break;
             case "ISC License":
                 licenseInfo = `${response.title} is covered under the ISC License, as outlined at the [ISC License page on ChooseALicense](https://choosealicense.com/licenses/isc/)`;
+                licenseBadge = '[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)';
                 break;
             case "GNU GPLv3":
                 licenseInfo = `${response.title} is covered under the GNU General Public License, as outlined at the [GNU GPL License v3 page on ChooseALicense](https://choosealicense.com/licenses/gpl-3.0/)`;
+                licenseBadge = '[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)'
                 break;
             case "Apache License 2.0":
                 licenseInfo = `${response.title} is covered under the Apache License, as outlined at the [Apache License 2.0 page on ChooseALicense](https://choosealicense.com/licenses/apache-2.0/)`;
+                licenseBadge = '[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)'
                 break;
         }
         let readmeString = `
 # ${response.title}
 
-Put license badge up here?
+${licenseBadge}
+${contribBadge}
 
 ## Description
 
@@ -129,10 +142,10 @@ If you any questions about this project please reach out to its creator via emai
 
 ## Credits
 
-List your collaborators, if any, with links to their GitHub profiles, along with any third-party assets that require attribution, and tutorials with links included. For example: https://coding-boot-camp.github.io/full-stack/github/professional-readme-guide
+${response.credits}
 
 --
         `
         
-        fs.writeFileSync('READMEtest1.md', readmeString);
+        fs.writeFileSync('READMEtest3.md', readmeString);
     })
