@@ -1,6 +1,6 @@
-# <Your-Project-Title>
+# Your-Project-Title
 
-!Put license badge up here? Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
+-Put license badge up here?
 
 ## Description
 
